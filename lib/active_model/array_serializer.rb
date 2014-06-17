@@ -14,6 +14,7 @@ module ActiveModel
   #
   class ArraySerializer
     extend ActiveSupport::DescendantsTracker
+    include ActiveModel::LinksSupport
 
     attr_reader :object, :options
 
@@ -48,6 +49,7 @@ module ActiveModel
       if root = @options[:root]
         hash.merge!(root => serializable_array)
         include_meta hash
+        include_links hash
         hash
       else
         serializable_array

@@ -39,6 +39,7 @@ module ActiveModel
   #
   class Serializer
     extend ActiveSupport::DescendantsTracker
+    include ActiveModel::LinksSupport
 
     INCLUDE_METHODS = {}
     INSTRUMENT = { :serialize => :"serialize.serializer", :associations => :"associations.serializer" }
@@ -344,6 +345,7 @@ module ActiveModel
 
         hash.merge!(root => serializable_hash)
         include_meta hash
+        include_links hash
         hash
       else
         serializable_hash
